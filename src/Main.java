@@ -32,7 +32,7 @@ public class Main {
 
                 lastArticleId = id;
 
-                System.out.printf("%d번 글이 생성되었습니다.",id);
+                System.out.printf("%d번 글이 생성되었습니다.%n",id);
             } else if (command.equals("article list")) {
                 System.out.println("게시물이 없습니다.");
             } else {
