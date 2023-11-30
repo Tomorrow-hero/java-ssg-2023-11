@@ -1,4 +1,6 @@
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -9,13 +11,15 @@ public class Main {
 
         int lastArticleId = 0;
 
+        List<Article> articles = new ArrayList<>();
+
         while (true) {
             System.out.print("명령어)-->");
             String command = sc.nextLine();
 
             command = command.trim();
 
-            if(command.length() == 0 ) {
+            if(command.isEmpty()) {
                 continue;
             }
 
@@ -30,11 +34,23 @@ public class Main {
                 System.out.print("내용 : ");
                 String body = sc.nextLine();
 
+                Article article = new Article(id, title, body);
+                articles.add(article);
+
                 lastArticleId = id;
 
                 System.out.printf("%d번 글이 생성되었습니다.%n",id);
             } else if (command.equals("article list")) {
-                System.out.println("게시물이 없습니다.");
+                if(articles.isEmpty()) {
+                    System.out.println("게시물이 없습니다.");
+                    continue;
+                }
+
+                for (int i = articles.size()-1; i >= 0; i--) {
+                    Article article = articles.get(i);
+
+                    System.out.printf("번호:%d 제목:%s%n",article.id, article.title);
+                }
             } else {
                 System.out.printf("%s(은)는 존재히지 않는 명령어 입니다.%n", command);
             }
@@ -44,5 +60,17 @@ public class Main {
 
         System.out.println("프로그램 종료");
 
+    }
+}
+
+class Article {
+    int id;
+    String title;
+    String body;
+
+    public Article(int id, String title, String body) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
     }
 }
