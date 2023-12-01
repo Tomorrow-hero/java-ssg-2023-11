@@ -34,7 +34,9 @@ public class Main {
                 System.out.print("내용 : ");
                 String body = sc.nextLine();
 
-                Article article = new Article(id, title, body);
+                String regDate = Util.getNowDateStr();
+
+                Article article = new Article(id, regDate, title, body);
                 articles.add(article);
 
                 lastArticleId = id;
@@ -70,7 +72,7 @@ public class Main {
                     System.out.printf("%d번 게시물은 존재하지 않습니다.%n", id);
                 }else {
                     System.out.printf("번호 : %d %n", foundArticle.id);
-                    System.out.printf("날짜 : %s %n", "2023-00-00 00:00:00");
+                    System.out.printf("날짜 : %s %n", foundArticle.regDate);
                     System.out.printf("제목 : %s %n", foundArticle.title);
                     System.out.printf("내용 : %s %n", foundArticle.body);
                 }
@@ -107,14 +109,3 @@ public class Main {
     }
 }
 
-class Article {
-    int id;
-    String title;
-    String body;
-
-    public Article(int id, String title, String body) {
-        this.id = id;
-        this.title = title;
-        this.body = body;
-    }
-}
